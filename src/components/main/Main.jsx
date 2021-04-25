@@ -5,6 +5,7 @@ import {getRepos} from '../../actions/repos';
 import Repo from '../repo/Repo';
 import {setCurrentPage} from '../../reducers/reposReducer';
 import {createPages} from '../../utils/pagesCreator';
+import {Redirect} from 'react-router-dom';
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const Main = () => {
   const currentPage = useSelector((state) => state.repos.currentPage);
   const totalCount = useSelector((state) => state.repos.totalCount);
   const perPage = useSelector((state) => state.repos.perPage);
+  const isFetchError = useSelector((state) => state.repos.isFetchError);
   const [searchValue, setSearchValue] = useState('');
   const pagesCount = Math.ceil(totalCount / perPage);
   const pages = [];
@@ -28,8 +30,17 @@ const Main = () => {
     dispatch(getRepos(searchValue, currentPage, perPage));
   }
 
+  // if (isFetchError) {
+  //   return <Redirect to="/error" />;
+  // }
+
   return (
     <div>
+      {isFetchError && (
+        <div className="alert alert-danger" role="alert">
+          Произошла ошибка! Пожалуйста обновите страницу!
+        </div>
+      )}
       <div className="search">
         <input
           value={searchValue}
