@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './main.less';
-import {useDispatch, useSelector} from 'react-redux';
-import {getRepos} from '../../actions/repos';
+import { useDispatch, useSelector } from 'react-redux';
+import { getRepos } from '../../actions/repos';
 import Repo from '../repo/Repo';
-import {setCurrentPage} from '../../reducers/reposReducer';
-import {createPages} from '../../utils/pagesCreator';
-import {Redirect} from 'react-router-dom';
+import { setCurrentPage } from '../../reducers/reposSlice';
+import { createPages } from '../../utils/pagesCreator';
+import { Redirect } from 'react-router-dom';
 
 const Main = () => {
   const dispatch = useDispatch();

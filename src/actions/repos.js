@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {setFetchError, setIsFetching, setRepos} from '../reducers/reposReducer';
+import { setFetchError, setIsFetching, setRepos } from '../reducers/reposSlice';
 
 export const getRepos = (searchQuery = 'stars:%3E1', currentPage, perPage) => {
   if (searchQuery == '') {
@@ -12,6 +12,7 @@ export const getRepos = (searchQuery = 'stars:%3E1', currentPage, perPage) => {
         `https://api.github.com/search/repositories?q=${searchQuery}&sort=stars&per_page=${perPage}&page=${currentPage}`,
       );
       dispatch(setRepos(response.data));
+      console.log('response.data', response.data);
     } catch (e) {
       dispatch(setFetchError(true));
       dispatch(setIsFetching(false));
